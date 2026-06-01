@@ -374,8 +374,18 @@ body {
 
 /* Responsividade para Mobile (Tela Cheia) */
 @media (max-width: 480px) {
+  html, body {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      touch-action: none; /* Previne que a tela inteira arraste */
+  }
   body {
       align-items: flex-start;
+      display: block; /* Remove flex centralizado para evitar bugs de teclado */
   }
   .app-container {
       height: 100dvh;
@@ -383,5 +393,8 @@ body {
       border-radius: 0;
       border: none;
       width: 100vw;
+  }
+  .chat-messages {
+      touch-action: pan-y; /* Permite rolagem apenas aqui dentro */
   }
 }
