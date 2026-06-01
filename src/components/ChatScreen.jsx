@@ -30,7 +30,10 @@ export default function ChatScreen({ userData, onReset }) {
       } catch (error) {
         console.error("Erro ao enviar webhook de reinício:", error);
       }
-      onReset();
+      // Limpa as mensagens locais, mantendo o usuário na mesma tela e com os mesmos dados
+      setMessages([
+        { id: Date.now(), text: "Envie uma mensagem para iniciar a conversa.", isUser: false },
+      ]);
     }
   };
 
