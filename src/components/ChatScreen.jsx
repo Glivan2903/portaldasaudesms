@@ -16,8 +16,20 @@ export default function ChatScreen({ userData, onReset }) {
     }
   }, [messages, isTyping]);
 
-  const handleReset = () => {
+  const handleReset = async () => {
     if (window.confirm("Tem certeza que deseja reiniciar o atendimento?")) {
+      try {
+        // Envia o telefone para o webhook de reset
+        await fetch("https://webhook.illo.app.br/webhook/aa78aabd-aa19-4717-91ed-8f55a162ec4d", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ phone: userData.phone }),
+        });
+      } catch (error) {
+        console.error("Erro ao enviar webhook de reinício:", error);
+      }
       onReset();
     }
   };
